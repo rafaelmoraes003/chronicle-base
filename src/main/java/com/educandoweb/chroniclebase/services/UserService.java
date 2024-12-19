@@ -1,5 +1,6 @@
 package com.educandoweb.chroniclebase.services;
 
+import com.educandoweb.chroniclebase.dto.UserDTO;
 import com.educandoweb.chroniclebase.entities.User;
 import com.educandoweb.chroniclebase.repository.UserRepository;
 import com.educandoweb.chroniclebase.services.exceptions.ObjectNotFoundException;
@@ -27,5 +28,13 @@ public class UserService {
         }
 
         return user.get();
+    }
+
+    public User insert(UserDTO userData) {
+        return userRepository.insert(fromDTO(userData));
+    }
+
+    private User fromDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
 }

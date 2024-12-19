@@ -1,7 +1,6 @@
 package com.educandoweb.chroniclebase.dto;
 
 import com.educandoweb.chroniclebase.entities.User;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 
