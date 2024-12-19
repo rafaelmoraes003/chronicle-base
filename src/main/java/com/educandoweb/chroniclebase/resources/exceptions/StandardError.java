@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus;
 import java.io.Serializable;
 import java.time.Instant;
 
-public class StandartError implements Serializable {
+public class StandardError implements Serializable {
     private Instant timestamp;
-    private HttpStatus status;
+    private Integer status;
     private String message;
 
-    public StandartError(Instant timestamp, HttpStatus status, String message) {
+    public StandardError(Instant timestamp, Integer status, String message) {
         this.timestamp = timestamp;
         this.status = status;
         this.message = message;
@@ -24,11 +24,11 @@ public class StandartError implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public HttpStatus getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
