@@ -1,6 +1,7 @@
 package com.educandoweb.chroniclebase.config;
 
 import com.educandoweb.chroniclebase.dto.AuthorDTO;
+import com.educandoweb.chroniclebase.dto.CommentDTO;
 import com.educandoweb.chroniclebase.entities.Post;
 import com.educandoweb.chroniclebase.entities.User;
 import com.educandoweb.chroniclebase.repository.PostRepository;
@@ -54,6 +55,13 @@ public class Config implements WebMvcConfigurer, CommandLineRunner {
                 "Woke up happy today!",
                 new AuthorDTO(u1)
         );
+
+        p1.getComments().addAll(Arrays.asList(
+                new CommentDTO("Safe trip!", Instant.now(), new AuthorDTO(u2)),
+                new CommentDTO("Enjoy!", Instant.now(), new AuthorDTO(u3))
+        ));
+
+        p2.getComments().add(new CommentDTO("Have a great day!", Instant.now(), new AuthorDTO(u2)));
 
         postRepository.saveAll(Arrays.asList(p1, p2));
 
