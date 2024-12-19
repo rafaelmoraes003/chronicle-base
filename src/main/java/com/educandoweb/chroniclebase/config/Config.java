@@ -31,6 +31,7 @@ public class Config implements WebMvcConfigurer, CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         userRepository.deleteAll();
+        postRepository.deleteAll();
 
         User u1 = new User(null, "Maria Brown", "maria@gmail.com");
         User u2 = new User(null, "Alex Green", "alex@gmail.com");
@@ -55,5 +56,9 @@ public class Config implements WebMvcConfigurer, CommandLineRunner {
         );
 
         postRepository.saveAll(Arrays.asList(p1, p2));
+
+        u1.getPosts().addAll(Arrays.asList(p1, p2));
+
+        userRepository.save(u1);
     }
 }
