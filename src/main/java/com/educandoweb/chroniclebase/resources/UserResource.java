@@ -1,5 +1,6 @@
 package com.educandoweb.chroniclebase.resources;
 
+import com.educandoweb.chroniclebase.dto.UserDTO;
 import com.educandoweb.chroniclebase.entities.User;
 import com.educandoweb.chroniclebase.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,13 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> users = userService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+        List<UserDTO> usersDTO = users
+                .stream()
+                .map(u -> new UserDTO(u))
+                .toList();
+        return ResponseEntity.status(HttpStatus.OK).body(usersDTO);
     }
 
 }
