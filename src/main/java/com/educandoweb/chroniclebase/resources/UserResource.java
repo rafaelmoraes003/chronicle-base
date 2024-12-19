@@ -1,6 +1,7 @@
 package com.educandoweb.chroniclebase.resources;
 
 import com.educandoweb.chroniclebase.dto.UserDTO;
+import com.educandoweb.chroniclebase.entities.Post;
 import com.educandoweb.chroniclebase.entities.User;
 import com.educandoweb.chroniclebase.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,12 @@ public class UserResource {
         User user = userService.update(id, userData);
         UserDTO userDTO = new UserDTO(user);
         return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(user.getPosts());
     }
 
 }
