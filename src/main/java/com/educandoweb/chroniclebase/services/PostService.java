@@ -61,6 +61,16 @@ public class PostService {
         return save(post);
     }
 
+    public Post insertComment(String postId, String userId, CommentDTO comment) {
+        Post post = findById(postId);
+        User user = userService.findById(userId);
+
+        comment = new CommentDTO(comment.getBody(), Instant.now(), new AuthorDTO(user));
+        post.getComments().add(comment);
+
+        return save(post);
+    }
+
     public Post save(Post post) {
         return postRepository.save(post);
     }

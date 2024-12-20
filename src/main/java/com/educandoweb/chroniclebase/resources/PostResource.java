@@ -43,4 +43,15 @@ public class PostResource {
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }
 
+    @PostMapping(value = "/{post_id}/comment/{user_id}")
+    public ResponseEntity<Post> insertComment(
+            @PathVariable("post_id") String postId,
+            @PathVariable("user_id") String userId,
+            @RequestBody CommentDTO comment
+    ) {
+        Post post = postService.insertComment(postId, userId, comment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(post);
+    }
+
+
 }
