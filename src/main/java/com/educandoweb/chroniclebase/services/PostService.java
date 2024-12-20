@@ -5,12 +5,12 @@ import com.educandoweb.chroniclebase.dto.CommentDTO;
 import com.educandoweb.chroniclebase.entities.Post;
 import com.educandoweb.chroniclebase.entities.User;
 import com.educandoweb.chroniclebase.repository.PostRepository;
-import com.educandoweb.chroniclebase.repository.UserRepository;
 import com.educandoweb.chroniclebase.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +69,11 @@ public class PostService {
         post.getComments().add(comment);
 
         return save(post);
+    }
+
+    public List<Post> fullSearch(String text, Instant minDate, Instant maxDate) {
+        maxDate = maxDate.plus(1, ChronoUnit.DAYS);
+        return postRepository.fullSearch(text, minDate, maxDate);
     }
 
     public Post save(Post post) {

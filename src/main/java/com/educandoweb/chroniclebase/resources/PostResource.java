@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -53,5 +54,18 @@ public class PostResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
     }
 
+    @GetMapping(value = "/full-search")
+    public ResponseEntity<List<Post>> fullSearch(
+            @RequestParam(value = "text", defaultValue = "") String text,
+            @RequestParam(value = "min_date", defaultValue = "") String minDate,
+            @RequestParam(value = "max_date", defaultValue = "") String maxDate
+    ) {
+        text = URL.decodeParam(text);
+        Instant min = URL.convertDate(minDate, Instant.EPOCH);
+        Instant max = URL.convertDate(maxDate, Instant.now());
 
+        List<Post> posts = postService.fullSearch(text, min, max);
+        return ResponseEntity.status(HttpStatus.OK).body(posts);
+    }
 }
+
