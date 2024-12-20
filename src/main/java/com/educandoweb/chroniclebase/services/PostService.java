@@ -53,5 +53,16 @@ public class PostService {
         findById(id);
         postRepository.deleteById(id);
     }
-    
+
+    public Post update(String id, Post postData) {
+        Post post = findById(id);
+        post.setTitle(postData.getTitle());
+        post.setBody(postData.getBody());
+        return save(post);
+    }
+
+    public Post save(Post post) {
+        return postRepository.save(post);
+    }
+
 }

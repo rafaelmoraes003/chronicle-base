@@ -37,4 +37,10 @@ public class PostResource {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Post> update(@PathVariable String id, @RequestBody Post postData) {
+        Post post = postService.update(id, postData);
+        return ResponseEntity.status(HttpStatus.OK).body(post);
+    }
+
 }
